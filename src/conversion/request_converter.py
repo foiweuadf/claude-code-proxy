@@ -218,7 +218,10 @@ def convert_claude_tool_results(msg: ClaudeMessage) -> List[Dict[str, Any]]:
                     {
                         "role": Constants.ROLE_TOOL,
                         "tool_call_id": block.tool_use_id,
-                        "content": content,
+                        # "content": content,
+                        # openai-gemini 要保证 tool的output是json
+                        "content": json.dumps({"output": content}),
+
                     }
                 )
 
